@@ -8,6 +8,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,7 +31,7 @@ public class JWTAuthFilter extends OncePerRequestFilter {
 
         String authHeader = request.getHeader("Authorization");
         if (authHeader == null || !authHeader.startsWith("Bearer ")){
-            throw new UnauthorizedException("Use the Bearer Token in the Authorization header");
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Use the Bearer Token in the Authorization header");
         }else {
             String token = authHeader.substring(7);
             jwtTools.verifyToken(token);

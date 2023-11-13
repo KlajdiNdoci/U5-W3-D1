@@ -88,4 +88,8 @@ public class UserService {
         userRepository.save(user);
         return user;
     }
+
+    public User findByEmail(String email){
+        return userRepository.findByEmail(email).orElseThrow(()-> new NotFoundException("User with email " + email + "not found"));
+    }
 }

@@ -12,6 +12,9 @@ public class AuthService {
     private JWTTools jwtTools;
 
     public String authenticateUser(UserLoginDTO body){
-        User user = userService.fi
+        User user = userService.findByEmail(body.email());
+        if(body.password().equals(user.getPassword())){
+
+        }
     }
 }

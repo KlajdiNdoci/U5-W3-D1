@@ -54,8 +54,12 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public User findByIdAndUpdate(@PathVariable int id, @RequestBody User body) {
+    public User findByIdAndUpdate(@PathVariable int id, @RequestBody @Validated NewUserDTO body,BindingResult validation) {
+        if (validation.hasErrors()){
+            throw new BadRequestException(validation.getAllErrors());
+        }else {
         return userService.findByIdAndUpdate(id, body);
+        }
     }
 
     @PostMapping("/{id}/upload")

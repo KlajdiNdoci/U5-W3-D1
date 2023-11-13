@@ -47,6 +47,10 @@ public class User {
         this.avatar = avatar;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public void setDevices(List<Device> devices) {
         this.devices = devices;
     }

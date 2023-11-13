@@ -18,7 +18,12 @@ public record NewUserDTO(
 
         @NotEmpty(message = "You have to enter an email!")
         @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "The email is not valid")
-        String email
-) {
+        String email,
+
+        @NotEmpty(message = "you have to enter a password")
+        @Size(min = 3, max= 20, message = "The password must have between 3 and 20 characters")
+        String password
+
+        ) {
 
 }

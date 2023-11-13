@@ -30,10 +30,17 @@ public class ExceptionsHandler {
     public ErrorsResponseDTO handleNotFound(NotFoundException e){
         return new ErrorsResponseDTO(e.getMessage(), new Date());
     }
+    @ExceptionHandler(UnauthorizedException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ErrorsResponseDTO handleUnauthorized(UnauthorizedException e){
+        return new ErrorsResponseDTO(e.getMessage(), new Date());
+    }
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorsResponseDTO handleGenericError(Exception e){
         return new ErrorsResponseDTO("server error", new Date());
     }
+
+
 }

@@ -28,19 +28,6 @@ public class UserController {
         return userService.getUsers(page, size, orderBy);
     }
 
-    @PostMapping("")
-    @ResponseStatus(HttpStatus.CREATED)
-    public User saveUser(@RequestBody @Validated NewUserDTO body, BindingResult validation) {
-        if (validation.hasErrors()){
-            throw new BadRequestException(validation.getAllErrors());
-        }else {
-            try{
-                return userService.save(body);
-            } catch (IOException e){
-                throw new RuntimeException(e);
-            }
-        }
-    }
 
     @GetMapping("/{id}")
     public User findById(@PathVariable long id) {
